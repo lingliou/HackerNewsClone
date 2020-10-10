@@ -25,7 +25,6 @@ export default async function Item(){
     ${hasComments ? story.comments.map(comment => 
         Comment(comment)).join('') : "No Comments"}
     </div>`
-
 }
 
 async function getStory(){
