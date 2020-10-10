@@ -1,12 +1,13 @@
 import view from '../utils/view.js';
 import Story from '../components/Story.js';
+import baseURL from '../utils/baseURL.js';
 
 export default async function Stories(path) {
   const stories = await getStories(path);
   const hasStories = stories.length > 0;
                     
   view.innerHTML = `<div>
-    ${hasStories ? stories.map((story,index) => Story({...story,index: index +1})).join('') : 'No stories'}
+    ${hasStories ? stories.map((story,index) => Story({...story, index: index +1})).join('') : 'No stories'}
   </div>`;  
 }
 
@@ -18,7 +19,7 @@ async function getStories(path) {
   } else if (isNewRoute) {
     path = '/newest';  
   } 
-  const response = await fetch(`https://node-hnapi.herokuapp.com${path}`);
+  const response = await fetch(`${baseURL}${path}`);
   const stories = await response.json();
   return stories;
 }
